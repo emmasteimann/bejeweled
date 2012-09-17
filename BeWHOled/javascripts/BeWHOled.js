@@ -17,8 +17,10 @@
           jewel_5: 'jewel_5.png',
           jewel_6: 'jewel_6.png',
           jewel_7: 'jewel_7.png',
-          jewel_8: 'jewel_8.png'
+          jewel_8: 'jewel_8.png',
+          focus: 'focus.png'
         };
+        this.gem_in_focus = null;
         if(typeof(debug_mode)==='undefined'){ debug_mode = false};
         this.debug_mode = debug_mode;
       }
@@ -51,11 +53,47 @@
       }
       BeWHOled.prototype.boardClicked = function(mouse_position) {
         var row, col;
-        col = Math.ceil(mouse_position.x /70)
-        row = Math.ceil(mouse_position.y /70)
+        row = Math.floor(mouse_position.x /70)
+        col = Math.floor(mouse_position.y /70)
+
+        // Debug to log messages one the screen
         if (this.debug_mode){
           this.message = "Col: " + col + " Row: " + row;
         }
+
+        // Find gem that was clicked
+        clicked_gem = BeWHOledBoard.getGemAt(row, col);
+
+        // Check to see if a gem is currently in focus
+        // if not, set one
+        if (this.gem_in_focus == null){
+          this.gem_in_focus = clicked_gem;
+          clicked_gem.inFocus = true;
+        } else {
+          if (this.gem_in_focus == clicked_gem) {
+
+            clicked_gem.inFocus = false;
+            this.gem_in_focus = null;
+
+          } else {
+
+            if(this.gem_in_focus.isAdjacent(clicked_gem)){
+              this.gem_in_focus.inFocus = false;
+              this.switchTiles(this.gem_in_focus, clicked_gem);
+              this.gem_in_focus = null;
+            }
+            else {
+              this.gem_in_focus.inFocus = false;
+              this.gem_in_focus = clicked_gem;
+              clicked_gem.inFocus = true;
+            }
+
+          }
+        }
+
+      }
+      BeWHOled.prototype.switchTiles = function(gem_one, gem_two) {
+
       }
       BeWHOled.prototype.getMousePos = function(canvas, evt) {
         var rect = this.canvas.getBoundingClientRect();
@@ -71,7 +109,10 @@
 
         BeWHOledBoard.drawBoard();
         this.drawGems();
+
+        // This is used for debugging
         this.outputMessage(this.message);
+
         // request new frame
         requestAnimFrame(function() {
           self.animate(canvas, context);

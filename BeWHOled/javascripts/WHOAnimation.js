@@ -21,8 +21,6 @@ WHOAnimation = (function() {
     }
     if (this.animation_type.gems_switch){
       BeWHOledBoard.switchGems(this.animating_gems[0], this.animating_gems[1]);
-      console.log("found sequences " + WHOProcessor.sequencesExist())
-      console.log("second pass " +this.second_pass)
       if(!WHOProcessor.sequencesExist() && !this.second_pass){
         this.unsetPartialAnimation();
         this.second_pass = true;

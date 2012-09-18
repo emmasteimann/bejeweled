@@ -22,6 +22,18 @@ WHOBoard = (function() {
     this.context.drawImage(GameData.images.board, 0, 0, 560, 560);
   }
 
+  WHOBoard.prototype.switchGems = function(gem_one,gem_two){
+        var col_one = gem_one.col;
+        var col_two = gem_two.col;
+        var row_one = gem_one.row;
+        var row_two = gem_two.row;
+        gem_one.col = col_two;
+        gem_one.row = row_two;
+        gem_two.col = col_one;
+        gem_two.row = row_one;
+        this.gems[row_one][col_one] = gem_two;
+        this.gems[row_two][col_two] = gem_one;
+  }
   WHOBoard.prototype.randomGem = function(row,col){
     selection = Math.floor((Math.random()*7)+1);
     gem = null;

@@ -32,6 +32,8 @@
         window.GameData = new GameData();
         GameData.loadImages(this.sources);
 
+        window.WHOAnimation = new WHOAnimation();
+
         // Create globally accessible game board
         window.BeWHOledBoard = new WHOBoard();
         BeWHOledBoard.initialize(this.context);
@@ -68,24 +70,24 @@
         // if not, set one
         if (this.gem_in_focus == null){
           this.gem_in_focus = clicked_gem;
-          clicked_gem.inFocus = true;
+          clicked_gem.in_focus = true;
         } else {
           if (this.gem_in_focus == clicked_gem) {
 
-            clicked_gem.inFocus = false;
+            clicked_gem.in_focus = false;
             this.gem_in_focus = null;
 
           } else {
 
             if(this.gem_in_focus.isAdjacent(clicked_gem)){
-              this.gem_in_focus.inFocus = false;
+              this.gem_in_focus.in_focus = false;
               this.switchTiles(this.gem_in_focus, clicked_gem);
               this.gem_in_focus = null;
             }
             else {
-              this.gem_in_focus.inFocus = false;
+              this.gem_in_focus.in_focus = false;
               this.gem_in_focus = clicked_gem;
-              clicked_gem.inFocus = true;
+              clicked_gem.in_focus = true;
             }
 
           }
@@ -93,7 +95,7 @@
 
       }
       BeWHOled.prototype.switchTiles = function(gem_one, gem_two) {
-
+        WHOAnimation.flipFlop(gem_one, gem_two);
       }
       BeWHOled.prototype.getMousePos = function(canvas, evt) {
         var rect = this.canvas.getBoundingClientRect();
@@ -104,12 +106,12 @@
       }
       BeWHOled.prototype.animate = function(canvas, context) {
         var self = this;
+        WHOAnimation.callFrame();
         // clear
         context.clearRect(0, 0, canvas.width, canvas.height);
 
         BeWHOledBoard.drawBoard();
         this.drawGems();
-
         // This is used for debugging
         this.outputMessage(this.message);
 

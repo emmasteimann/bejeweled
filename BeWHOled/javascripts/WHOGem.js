@@ -11,6 +11,7 @@ WHOGem = (function() {
     this.shift_to_y = 0;
     this.image_title = image_title;
     this.in_focus = false;
+    this.is_animating = false;
   }
 
   WHOGem.prototype.initialize = function() {
@@ -21,8 +22,10 @@ WHOGem = (function() {
     if (this.in_focus){
       context.drawImage(GameData.images.focus, (this.row * 70), (this.col * 70), 70, 70);
     }
-    this.relative_x += this.shift_to_x;
-    this.relative_y += this.shift_to_y;
+    if (this.is_animating){
+      this.relative_x += this.shift_to_x;
+      this.relative_y += this.shift_to_y;
+    }
     context.drawImage(GameData.images[this.image_title], this.relative_x, this.relative_y, 50, 50);
   }
 
@@ -33,13 +36,12 @@ WHOGem = (function() {
 
   WHOGem.prototype.shiftY = function(shift_direction) {
     this.shift_to_y = shift_direction;
-  }
-  WHOGem.prototype.moo = function() {
-    console.log("moo")
+    this.is_animating = true;
   }
   WHOGem.prototype.stop = function() {
     this.shift_to_x = 0;
     this.shift_to_y = 0;
+    this.is_animating = false;
   }
 
   WHOGem.prototype.isAdjacent = function(clicked_gem) {

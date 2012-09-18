@@ -6,6 +6,7 @@ WHOAnimation = (function() {
     this.current_frame = 0;
     this.swap_speed = 3;
     this.total_swap_frames = 70 / this.swap_speed;
+    this.swap_speed = 3 - (2 / this.total_swap_frames);
     this.animating_gems = null;
     this.animation_type = {
       gems_switch: 0,

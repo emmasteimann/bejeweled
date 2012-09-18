@@ -21,21 +21,20 @@
           focus: 'focus.png'
         };
         this.gem_in_focus = null;
-        if(typeof(debug_mode)==='undefined'){ debug_mode = false};
+        if(typeof(debug_mode)==='undefined'){ debug_mode = false };
         this.debug_mode = debug_mode;
       }
 
       BeWHOled.prototype.initialize = function() {
         var self = this;
         self.loadEventListeners();
-        // Create globally accessible game data
+        // Create globally accessible game objects
         window.GameData = new GameData();
-        GameData.loadImages(this.sources);
-
         window.WHOAnimation = new WHOAnimation();
-
-        // Create globally accessible game board
+        window.WHOProcessor = new WHOProcessor();
         window.BeWHOledBoard = new WHOBoard();
+
+        GameData.loadImages(this.sources);
         BeWHOledBoard.initialize(this.context);
 
         this.animate(this.canvas, this.context);
@@ -147,8 +146,8 @@
           window.setTimeout(callback, 1000 / 60);
         };
       })();
-      var bewholed_game = new BeWHOled();
-      bewholed_game.initialize();
+      window.BeWHOledGame = new BeWHOled();
+      BeWHOledGame.initialize();
     });
 
 }).call(this);

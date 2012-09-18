@@ -21,13 +21,14 @@ WHOAnimation = (function() {
       BeWHOledBoard.switchGems(this.animating_gems[0], this.animating_gems[1]);
     }
     this.unsetAnimation();
+    WHOProcessor.columnSequences();
+    WHOProcessor.rowSequences();
   }
   WHOAnimation.prototype.unsetAnimation = function() {
     this.animating_gems = null;
     this.current_frame = 0;
     this.animation_type.gems_switch = 0;
     this.animation_type.gems_falling = 0;
-
   }
   WHOAnimation.prototype.callFrame = function() {
     if (this.animating_gems){

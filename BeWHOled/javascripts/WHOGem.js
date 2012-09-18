@@ -12,6 +12,7 @@ WHOGem = (function() {
     this.image_title = image_title;
     this.in_focus = false;
     this.is_animating = false;
+    this.debug_background = null;
   }
 
   WHOGem.prototype.initialize = function() {
@@ -19,6 +20,14 @@ WHOGem = (function() {
   }
 
   WHOGem.prototype.draw = function(context) {
+    if (window.BeWHOledGame.debug_mode){
+      if (this.debug_background){
+        context.beginPath();
+        context.rect(this.relative_x-10, this.relative_y-10, 70, 70);
+        context.fillStyle = this.debug_background;
+        context.fill();
+      }
+    }
     if (this.in_focus){
       context.drawImage(GameData.images.focus, (this.row * 70), (this.col * 70), 70, 70);
     }

@@ -111,6 +111,19 @@ WHOBoard = (function() {
     }
     return gem;
   }
+  WHOBoard.prototype.whatsGoingDown = function(){
+    var row, column;
+    var falling_gems = [];
+    for (row = 0; row < 8; row++){
+      for(column = 0; column < 8; column++){
+        var current_gem = this.gems[row][column];
+        if(current_gem.to_fall && !current_gem.toBeRemoved){
+          falling_gems.push(current_gem)
+        }
+      }
+    }
+    return falling_gems;
+  }
   return WHOBoard;
 
 })();

@@ -7,7 +7,9 @@ WHOAnimation = (function() {
     this.swap_speed = 3;
     this.total_swap_frames = 70 / this.swap_speed;
     this.swap_speed = 3 - (2 / this.total_swap_frames);
+    this.total_falling_frames = 0;
     this.animating_gems = null;
+    this.second_pass = false;
     this.animation_type = {
       gems_switch: 0,
       gems_falling: 0
@@ -19,25 +21,45 @@ WHOAnimation = (function() {
     }
     if (this.animation_type.gems_switch){
       BeWHOledBoard.switchGems(this.animating_gems[0], this.animating_gems[1]);
+      console.log("found sequences " + WHOProcessor.sequencesExist())
+      console.log("second pass " +this.second_pass)
+      if(!WHOProcessor.sequencesExist() && !this.second_pass){
+        this.unsetPartialAnimation();
+        this.second_pass = true;
+        this.flipFlop(this.animating_gems[0], this.animating_gems[1]);
+        return;
+      }
     }
     this.unsetAnimation();
-    if (WHOProcessor.sequencesExist()){
-      WHOProcessor.setForRemoval();
-      WHOProcessor.findSpacesToFill();
-    }
+    BeWHOledGame.refreshSequences()
+    BeWHOledGame.checkWHOSequences()
+  }
+  WHOAnimation.prototype.unsetPartialAnimation = function() {
+    this.current_frame = 0;
+    this.animation_type.gems_switch = 0;
   }
   WHOAnimation.prototype.unsetAnimation = function() {
     this.animating_gems = null;
     this.current_frame = 0;
     this.animation_type.gems_switch = 0;
     this.animation_type.gems_falling = 0;
+    this.total_falling_frames = 0;
+    this.second_pass = false;
   }
   WHOAnimation.prototype.callFrame = function() {
     if (this.animating_gems){
-      if (this.current_frame > this.total_swap_frames) {
-        this.finishedSwapping();
+      if(this.animation_type.gems_falling){
+        if (this.current_frame > this.total_falling_frames) {
+          this.finishedSwapping();
+        } else {
+          this.current_frame++;
+        }
       } else {
-        this.current_frame++;
+        if (this.current_frame > this.total_swap_frames) {
+          this.finishedSwapping();
+        } else {
+          this.current_frame++;
+        }
       }
     }
   }
@@ -66,6 +88,15 @@ WHOAnimation = (function() {
         gem_one.shiftX(this.swap_speed * shift_direction);
         gem_two.shiftX(this.swap_speed * -shift_direction);
       }
+
+  }
+  WHOAnimation.prototype.loadNewGems = function() {
+    this.animating_gems = BeWHOledBoard.whatsGoingDown();
+    this.animation_type.gems_falling = true;
+    for (i = 0; i < this.animating_gems.length; i++){
+      this.total_falling_frames = 32
+      this.animating_gems[i].shiftY(this.animating_gems[i].fall_distance*2);
+    }
 
   }
 

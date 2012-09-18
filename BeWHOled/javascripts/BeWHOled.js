@@ -97,6 +97,18 @@
         }
 
       }
+      BeWHOled.prototype.checkWHOSequences = function() {
+        if (WHOProcessor.sequencesExist()){
+          WHOProcessor.setForRemoval();
+          WHOProcessor.findSpacesToFill();
+          WHOAnimation.loadNewGems();
+        }
+      }
+      BeWHOled.prototype.refreshSequences = function() {
+        WHOProcessor.loadSpaces();
+        WHOProcessor.loadBlank();
+        WHOProcessor.resetState();
+      }
       BeWHOled.prototype.switchTiles = function(gem_one, gem_two) {
         WHOAnimation.flipFlop(gem_one, gem_two);
       }

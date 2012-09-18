@@ -21,8 +21,10 @@ WHOAnimation = (function() {
       BeWHOledBoard.switchGems(this.animating_gems[0], this.animating_gems[1]);
     }
     this.unsetAnimation();
-    WHOProcessor.columnSequences();
-    WHOProcessor.rowSequences();
+    if (WHOProcessor.sequencesExist()){
+      WHOProcessor.setForRemoval();
+      WHOProcessor.findSpacesToFill();
+    }
   }
   WHOAnimation.prototype.unsetAnimation = function() {
     this.animating_gems = null;
@@ -51,8 +53,8 @@ WHOAnimation = (function() {
         else {
           shift_direction = -1;
         }
-        gem_one.shiftX(this.swap_speed * shift_direction);
-        gem_two.shiftX(this.swap_speed * -shift_direction);
+        gem_one.shiftY(this.swap_speed * shift_direction);
+        gem_two.shiftY(this.swap_speed * -shift_direction);
       }
       else {
         if (gem_one.col < gem_two.col) {
@@ -61,8 +63,8 @@ WHOAnimation = (function() {
         else {
           shift_direction = -1;
         }
-        gem_one.shiftY(this.swap_speed * shift_direction);
-        gem_two.shiftY(this.swap_speed * -shift_direction);
+        gem_one.shiftX(this.swap_speed * shift_direction);
+        gem_two.shiftX(this.swap_speed * -shift_direction);
       }
 
   }

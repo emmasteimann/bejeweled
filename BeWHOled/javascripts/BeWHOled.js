@@ -37,6 +37,10 @@
         GameData.loadImages(this.sources);
         BeWHOledBoard.initialize(this.context);
 
+        if (WHOProcessor.sequencesExist()){
+          WHOProcessor.clearAllSequences();
+        }
+
         this.animate(this.canvas, this.context);
       }
       BeWHOled.prototype.loadEventListeners = function(){
@@ -54,8 +58,8 @@
       }
       BeWHOled.prototype.boardClicked = function(mouse_position) {
         var row, col;
-        row = Math.floor(mouse_position.x /70)
-        col = Math.floor(mouse_position.y /70)
+        col = Math.floor(mouse_position.x /70)
+        row = Math.floor(mouse_position.y /70)
 
         // Debug to log messages one the screen
         if (this.debug_mode){

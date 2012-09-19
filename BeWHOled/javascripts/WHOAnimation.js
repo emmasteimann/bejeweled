@@ -28,8 +28,10 @@ WHOAnimation = (function() {
         return;
       }
     }
+    if (this.animation_type.gems_falling){
+      BeWHOledGame.refreshSequences()
+    }
     this.unsetAnimation();
-    BeWHOledGame.refreshSequences()
     BeWHOledGame.checkWHOSequences()
   }
   WHOAnimation.prototype.unsetPartialAnimation = function() {

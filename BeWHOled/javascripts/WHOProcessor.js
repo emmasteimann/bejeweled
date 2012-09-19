@@ -126,12 +126,13 @@ WHOProcessor = (function() {
             }
         }
         if (sequence.length > 2){
+
           this.sequences.push(sequence);
           if (window.BeWHOledGame.debug_mode){
             this.debugGems("yellow", sequence);
           }
         }
-        column = temp - 1;
+        // column = temp - 1;
       }
     }
   }
@@ -156,7 +157,7 @@ WHOProcessor = (function() {
             this.debugGems("red", sequence);
           }
         }
-        row = temp - 1;
+        // row = temp - 1;
       }
     }
   }

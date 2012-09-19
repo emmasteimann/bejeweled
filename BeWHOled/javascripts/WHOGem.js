@@ -62,13 +62,15 @@ WHOGem = (function() {
     if(!this.toBeRemoved){
       context.drawImage(GameData.images[this.image_title], this.relative_x, this.relative_y, 50, 50);
     } else {
-      if (this.vortex_opacity > 1){
-        context.drawImage(window.time_vortex, this.relative_x-10, this.relative_y-10);
-      } else {
-        this.vortex_opacity += 0.05;
-        context.globalAlpha = this.vortex_opacity;
-        context.drawImage(window.time_vortex, this.relative_x-10, this.relative_y-10);
-        context.globalAlpha = 1;
+      if (!window.BeWHOledGame.debug_mode){
+        if (this.vortex_opacity > 1){
+          context.drawImage(window.time_vortex, this.relative_x-10, this.relative_y-10);
+        } else {
+          this.vortex_opacity += 0.05;
+          context.globalAlpha = this.vortex_opacity;
+          context.drawImage(window.time_vortex, this.relative_x-10, this.relative_y-10);
+          context.globalAlpha = 1;
+        }
       }
       if (this.gem_opacity < 0){
       } else{

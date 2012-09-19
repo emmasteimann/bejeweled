@@ -18,16 +18,17 @@
           jewel_6: 'jewel_6.png',
           jewel_7: 'jewel_7.png',
           jewel_8: 'jewel_8.png',
+          overlay: 'overlay.png',
           focus: 'focus.png'
         };
         this.gem_in_focus = null;
         if(typeof(debug_mode)==='undefined'){ debug_mode = false };
         this.debug_mode = debug_mode;
+        this.show_overlay = true;
       }
 
       BeWHOled.prototype.initialize = function() {
         var self = this;
-        self.loadEventListeners();
         // Create globally accessible game objects
         window.GameData = new GameData();
         window.WHOAnimation = new WHOAnimation();
@@ -35,6 +36,8 @@
         window.BeWHOledBoard = new WHOBoard();
 
         GameData.loadImages(this.sources);
+        this.context.drawImage(GameData.images.overlay, 0, 0, 560, 560);
+        setTimeout(function(){self.hideOverlay()},2000);
         window.time_vortex = $('#time_vortex').get(0);
         BeWHOledBoard.initialize(this.context);
 
@@ -98,6 +101,10 @@
         }
 
       }
+      BeWHOled.prototype.hideOverlay = function(){
+        this.loadEventListeners();
+        this.show_overlay = false;
+      }
       BeWHOled.prototype.checkWHOSequences = function() {
         if (WHOProcessor.sequencesExist()){
           WHOProcessor.setForRemoval();
@@ -130,7 +137,9 @@
         this.drawGems();
         // This is used for debugging
         this.outputMessage(this.message);
-
+        if (this.show_overlay){
+          this.context.drawImage(GameData.images.overlay, 0, 0, 560, 560);
+        }
         // request new frame
         requestAnimFrame(function() {
           self.animate(canvas, context);

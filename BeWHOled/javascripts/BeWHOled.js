@@ -35,6 +35,7 @@
         window.BeWHOledBoard = new WHOBoard();
 
         GameData.loadImages(this.sources);
+        window.time_vortex = $('#time_vortex').get(0);
         BeWHOledBoard.initialize(this.context);
 
         if (WHOProcessor.sequencesExist()){

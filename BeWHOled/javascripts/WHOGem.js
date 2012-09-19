@@ -18,6 +18,8 @@ WHOGem = (function() {
     this.fall_distance = 0;
     this.to_fall = false;
     this.log_row_and_y;
+    this.gem_opacity = 1;
+    this.vortex_opacity = 0;
   }
 
   WHOGem.prototype.initialize = function() {
@@ -59,6 +61,22 @@ WHOGem = (function() {
     // TODO: apply transition instead of flipping off
     if(!this.toBeRemoved){
       context.drawImage(GameData.images[this.image_title], this.relative_x, this.relative_y, 50, 50);
+    } else {
+      if (this.vortex_opacity > 1){
+        context.drawImage(window.time_vortex, this.relative_x-10, this.relative_y-10);
+      } else {
+        this.vortex_opacity += 0.05;
+        context.globalAlpha = this.vortex_opacity;
+        context.drawImage(window.time_vortex, this.relative_x-10, this.relative_y-10);
+        context.globalAlpha = 1;
+      }
+      if (this.gem_opacity < 0){
+      } else{
+        this.gem_opacity -= 0.05;
+        context.globalAlpha = this.gem_opacity;
+        context.drawImage(GameData.images[this.image_title], this.relative_x, this.relative_y, 50, 50);
+        context.globalAlpha = 1;
+      }
     }
   }
 
@@ -75,6 +93,7 @@ WHOGem = (function() {
     this.shift_to_x = 0;
     this.shift_to_y = 0;
     this.is_animating = false;
+    this.gem_opacity = 0;
   }
 
   WHOGem.prototype.isAdjacent = function(clicked_gem) {

@@ -75,6 +75,11 @@ WHOAnimation = (function() {
         else {
           shift_direction = -1;
         }
+        var flop_distance = Math.abs((gem_one.relative_y - 10) - (gem_two.relative_y - 10))
+        this.swap_speed = 2;
+        this.total_swap_frames = flop_distance / this.swap_speed;
+        this.swap_speed = this.swap_speed - (2 / this.total_swap_frames);
+
         gem_one.shiftY(this.swap_speed * shift_direction);
         gem_two.shiftY(this.swap_speed * -shift_direction);
       }
@@ -85,6 +90,11 @@ WHOAnimation = (function() {
         else {
           shift_direction = -1;
         }
+        var flop_distance = Math.abs((gem_one.relative_x - 10) - (gem_two.relative_x - 10))
+        this.swap_speed = 2;
+        this.total_swap_frames = flop_distance / this.swap_speed;
+        this.swap_speed = this.swap_speed - (2 / this.total_swap_frames);
+
         gem_one.shiftX(this.swap_speed * shift_direction);
         gem_two.shiftX(this.swap_speed * -shift_direction);
       }

@@ -1,0 +1,60 @@
+body {
+  margin: 0 auto;
+  padding: 0px;
+  width: 820px;
+  #bewholed_canvas {
+    border: 1px solid #9C9898;
+  }
+  #game_container {
+    height: 560px;
+  }
+  #bewholed_game {
+    float: left;
+    width: 560px;
+    margin: 0px;
+    height: 570px;
+  }
+  #score_panel{
+    float: left;
+    width: 180px;
+    height: 560px;
+    margin-top: 20px;
+    padding-left: 20px;
+    h2 {
+      font-size: 50px;
+      margin: 0px;
+      padding: 0px;
+    }
+    #your_score{
+      h2 {
+        margin-top: -10px;
+      }
+      #score_bar_container {
+        width: 195px;
+        margin: 0px;
+        border: 2px solid #FFD700;
+        height: 20px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        #score_bar {
+          background-image: url("score_bar.png");
+          width: 195px;
+          height: 20px;
+          margin: 0px;
+          -moz-border-radius: 5px;
+          border-radius: 5px;
+        }
+      }
+    }
+    #high_scores {
+      margin-top: 150px;
+    }
+    #score_board{
+      border: 2px solid #272D70;
+      height: 215px;
+      width: 195px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+    }
+  }
+}

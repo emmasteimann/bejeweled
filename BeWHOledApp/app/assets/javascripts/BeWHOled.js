@@ -25,10 +25,17 @@
         if(typeof(debug_mode)==='undefined'){ debug_mode = false };
         this.debug_mode = debug_mode;
         this.show_overlay = true;
+        this.score_bar_cycle = 0;
       }
 
       BeWHOled.prototype.initialize = function() {
         var self = this;
+        // Cycle scorebar background
+        // setInterval(function() {
+        //   self.score_bar_cycle += 1;
+        //   // $("#score_bar").css("width", self.score_bar_cycle + "px")
+        //   $("#score_bar").css("background-position", -self.score_bar_cycle + "px 0px")
+        // }, 50);
         // Create globally accessible game objects
         window.GameData = new GameData();
         window.WHOAnimation = new WHOAnimation();
@@ -172,6 +179,7 @@
           window.setTimeout(callback, 1000 / 60);
         };
       })();
+
       window.BeWHOledGame = new BeWHOled();
       BeWHOledGame.initialize();
     });

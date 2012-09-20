@@ -22,13 +22,7 @@
   <link href='http://fonts.googleapis.com/css?family=Skranji' rel='stylesheet' type='text/css'>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
-</head>
-<body>
-<a href="https://github.com/emmasteimann/bejeweled" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
-<%= yield %>
-<footer style="text-align: center;">Copyright Emma Steimann 2012<br/><div class="details">Gems borrowed from <a href="http://iconfactory.com/freeware/preview/dwho" target="_blank">Iconfactory - Gedeon Maheux</a></div><br/><a class="my_site" href="http://rainydayinteractive.net" target="_blank">rainydayinteractive.net</a></footer>
-</body>
-<script type="text/javascript">
+  <script type="text/javascript">
 
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-34951305-1']);
@@ -41,4 +35,10 @@
   })();
 
 </script>
+</head>
+<body>
+<a href="https://github.com/emmasteimann/bejeweled" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+<%= yield %>
+<footer style="text-align: center;">Copyright Emma Steimann 2012<br/><div class="details">Gems borrowed from <a href="http://iconfactory.com/freeware/preview/dwho" target="_blank">Iconfactory - Gedeon Maheux</a></div><br/><a class="my_site" href="http://rainydayinteractive.net" target="_blank">rainydayinteractive.net</a></footer>
+</body>
 </html>

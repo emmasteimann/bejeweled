@@ -3,5 +3,6 @@ class HighScores < ActiveRecord::Base
 
   validates :name, :presence => true
   validates :score, :presence => true
+  validates_uniqueness_of :name, :scope => [:score]
 
 end

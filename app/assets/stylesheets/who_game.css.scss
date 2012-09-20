@@ -16,6 +16,12 @@ body {
         text-decoration: none;
       }
     }
+    a:link, a:visited, a:hover, a:active{
+      color: #555;
+      font-size: 12px;
+      text-decoration: none;
+      cursor: pointer;
+    }
   }
   #bewholed_canvas {
     border: 1px solid #9C9898;

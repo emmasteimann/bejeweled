@@ -3,7 +3,10 @@
     var BeWHOled;
 
     BeWHOled = (function() {
-
+      /**
+      * BeWHOled - Object constructor for main application
+      * @param {Boolean} debug_mode - turns on debug mode for app
+      */
       function BeWHOled(debug_mode) {
         this.canvas = document.getElementById('bewholed_canvas');
         this.context = this.canvas.getContext('2d');
@@ -27,7 +30,9 @@
         this.show_overlay = true;
         this.score_bar_cycle = 0;
       }
-
+      /**
+      * initialize - Intializes global objects and starts animation cycle
+      */
       BeWHOled.prototype.initialize = function() {
         var self = this;
         // Cycle scorebar background
@@ -55,6 +60,9 @@
         WHOProcessor.initial_run = false;
         this.animate(this.canvas, this.context);
       }
+      /**
+      * loadEventListeners - binds all listeners for the app
+      */
       BeWHOled.prototype.loadEventListeners = function(){
         var self = this;
         if (this.debug_mode){
@@ -74,6 +82,10 @@
           self.resetGame($(this));
         });
       }
+      /**
+      * saveScore - event method to submit score form
+      * @param {Object} item - DOM object sending
+      */
       BeWHOled.prototype.saveScore = function(item) {
         if (!$("#high_scores_name").val()){
           $("#message").css("color","#f00").text("Enter name")
@@ -86,6 +98,10 @@
           $("#new_high_scores").submit()
         }
       }
+      /**
+      * resetGame - event method to reload game
+      * @param {Object} item - DOM object sending
+      */
       BeWHOled.prototype.resetGame = function(item) {
         var self = this;
         this.show_overlay = true;
@@ -94,6 +110,10 @@
         GameData.resetScore();
         this.loadEventListeners();
       }
+      /**
+      * boardClicked - event method to detemine mouse position on board
+      * @param {Object} mouse_position - mouse positions
+      */
       BeWHOled.prototype.boardClicked = function(mouse_position) {
         var row, col;
         col = Math.floor(mouse_position.x /70)
@@ -135,10 +155,20 @@
         }
 
       }
+      /**
+      * hideOverlay - Hides overlat screen and launches listeners
+      */
       BeWHOled.prototype.hideOverlay = function(){
-        this.loadEventListeners();
+        var self = this;
+        this.canvas.addEventListener('click', function(evt) {
+          var mouse_position = self.getMousePos(self.canvas, evt);
+          self.boardClicked(mouse_position);
+        }, false);
         this.show_overlay = false;
       }
+      /**
+      * checkWHOSequences - check for sequences of gems
+      */
       BeWHOled.prototype.checkWHOSequences = function() {
         if (WHOProcessor.sequencesExist()){
           WHOProcessor.setForRemoval();
@@ -146,14 +176,27 @@
           WHOAnimation.loadNewGems();
         }
       }
+      /**
+      * refreshSequences - load gems to be deleted
+      */
       BeWHOled.prototype.refreshSequences = function() {
         WHOProcessor.loadSpaces();
         WHOProcessor.loadBlank();
         WHOProcessor.resetState();
       }
+      /**
+      * switchTiles - swaps gems
+      * @param {Object} gem_one - gem to be swapped
+      * @param {Object} gem_two - gem to be swapped
+      */
       BeWHOled.prototype.switchTiles = function(gem_one, gem_two) {
         WHOAnimation.flipFlop(gem_one, gem_two);
       }
+      /**
+      * getMousePos - grabs mouse data on canvas
+      * @param {Object} canvas - canvas to check within
+      * @param {Object} evt - event object
+      */
       BeWHOled.prototype.getMousePos = function(canvas, evt) {
         var rect = this.canvas.getBoundingClientRect();
         return {
@@ -161,6 +204,11 @@
           y: evt.clientY - rect.top
         };
       }
+      /**
+      * animate - frame animation method
+      * @param {Object} canvas - canvas to animate
+      * @param {Object} context - context to animate
+      */
       BeWHOled.prototype.animate = function(canvas, context) {
         var self = this;
         WHOAnimation.callFrame();
@@ -179,11 +227,18 @@
           self.animate(canvas, context);
         });
       }
+      /**
+      * outputMessage - outputs string in debug mode
+      * @param {string} message - canvas to animate
+      */
       BeWHOled.prototype.outputMessage = function(message){
         this.context.font = '18pt Calibri';
         this.context.fillStyle = '#00FF00';
         this.context.fillText(message, 10, 25);
       }
+      /**
+      * drawGems - draw an initial gem set
+      */
       BeWHOled.prototype.drawGems = function(){
         var row, col, gem;
         for (row=0;row<8;row++){

@@ -4,6 +4,7 @@ BeWHOledApp::Application.routes.draw do
 
   root :to => 'who_game#index'
   resources :who_game
+  match '*path' => redirect('/')
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

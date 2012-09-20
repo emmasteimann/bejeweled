@@ -1,3 +1,6 @@
+html {
+  background-image: url("bg.jpg");
+}
 body {
   margin: 0 auto;
   padding: 0px;
@@ -16,7 +19,7 @@ body {
   }
   #score_panel{
     float: left;
-    width: 180px;
+    width: 200px;
     height: 560px;
     margin-top: 20px;
     padding-left: 20px;
@@ -29,6 +32,59 @@ body {
       h2 {
         margin-top: -10px;
       }
+      input::-webkit-input-placeholder {
+          color:    #666;
+      }
+      input:-moz-placeholder {
+          color:    #666;
+      }
+      input:-ms-input-placeholder {
+          color:    #666;
+      }
+      #message {
+        padding-left: 5px;
+        font-family: sans-serif;
+        font-weight: bold;
+        font-size: 12px;
+      }
+      #high_scores_name{
+        background-color: rgba(100, 100, 100, 0.3);
+        width: 165px;
+        border: 0 none;
+        height: 18px;
+        padding-left: 5px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+      }
+      #current_level{
+        font-family: 'Skranji', cursive;
+      }
+      #your_name{
+        font-family: 'Skranji', cursive;
+        color: #272D70;
+      }
+      #name_check {
+        cursor: pointer;
+        margin-top: 5px;
+        width: 118px;
+        background-color: #556B2F;
+        border: 0 none;
+        border-radius: 4px;
+        -moz-border-radius: 4px;
+        color: yellow;
+        height: 20px;
+      }
+      #new_game{
+        cursor: pointer;
+        margin-top: 10px;
+        width: 118px;
+        background-color: #8B0000;
+        border: 0 none;
+        border-radius: 4px;
+        -moz-border-radius: 4px;
+        color: white;
+        height: 20px;
+      }
       #score_bar_container {
         width: 195px;
         margin: 0px;
@@ -38,23 +94,55 @@ body {
         border-radius: 5px;
         #score_bar {
           background-image: url("score_bar.png");
-          width: 195px;
+          width: 0px;
           height: 20px;
           margin: 0px;
           -moz-border-radius: 5px;
           border-radius: 5px;
         }
       }
+      #score_total{
+        font-family: 'Skranji', cursive;
+      }
     }
     #high_scores {
-      margin-top: 150px;
+      margin-top: 110px;
     }
     #score_board{
       border: 2px solid #272D70;
-      height: 215px;
       width: 195px;
+      max-height: 195px;
+      overflow: scroll;
       -moz-border-radius: 5px;
       border-radius: 5px;
+      table {
+        font-family: 'Skranji', cursive;
+        border-collapse: collapse;
+        thead {
+          background-color: #FAFAD2;
+          border-bottom: 1px solid #000;
+          th {
+            text-align: left;
+            color: #2F4F4F;
+            width: 97.5px;
+          }
+          th.first {
+              -moz-border-radius: 5px 0 0 0;
+              border-radius: 5px 0 0 0;
+              padding-left: 15px;
+          }
+          th.last {
+              -moz-border-radius: 0 5px 0 0;
+              border-radius: 0 5px 0 0;
+          }
+        }
+        tr {
+          td {
+            width: 97.5px;
+          }
+          width: 195px;
+        }
+      }
     }
   }
 }

@@ -1,6 +1,3 @@
-<script type="text/javascript">
-      Cufon.replace('h2'); // Works without a selector engine
-</script>
 <div id="game_container">
   <div id="bewholed_game">
     <img src="assets/time_vortex.gif" id="time_vortex" width="0" height="0"/>
@@ -8,20 +5,33 @@
   </div>
   <div id="score_panel">
     <div id="your_score">
+      <div id="current_level">Current Level: <span id="level_number">1</span></div>
       <div id="score_bar_container">
         <div id="score_bar"></div>
       </div>
       <h2 style="font-size: 50px;">Current score</h2>
-      <%= form_for HighScores.new, :url => { :action => "create" }, :html => {:class => "nifty_form"} do |f| %>
+      <div id="score_total">0</div>
+      <%= form_for HighScores.new, :remote => true, :url => { :action =>  :create, :controller => :high_scores}, :html => {:class => "nifty_form"} do |f| %>
+      <%= f.hidden_field(:score) %>
       <%= f.text_field :name %>
-      <%= f.submit "Create" %>
+      <%= button_tag(:type => 'button', :id =>"name_check") do content_tag(:strong, 'Save High Score') end %><span id="message"></span>
     <% end %>
+    <%= button_tag(:type => 'button', :id =>"new_game") do content_tag(:strong, 'New Game') end %>
     </div>
     <div id="high_scores">
       <h2 style="font-size: 50px;">High Scores</h2>
       <div id="score_board">
-
+        <table>
+          <thead><th class="first">Name</th><th class="last">Score</th></thead>
+          <tbody>
+            <%= render "score_list" %>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
 </div>
+<script type="text/javascript">
+      Cufon.replace('h2');
+      $("#high_scores_name").watermark("Name");
+</script>

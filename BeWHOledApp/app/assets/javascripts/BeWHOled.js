@@ -48,10 +48,11 @@
         window.time_vortex = $('#time_vortex').get(0);
         BeWHOledBoard.initialize(this.context);
 
+        WHOProcessor.initial_run = true;
         if (WHOProcessor.sequencesExist()){
           WHOProcessor.clearAllSequences();
         }
-
+        WHOProcessor.initial_run = false;
         this.animate(this.canvas, this.context);
       }
       BeWHOled.prototype.loadEventListeners = function(){
@@ -66,6 +67,32 @@
           var mouse_position = self.getMousePos(self.canvas, evt);
           self.boardClicked(mouse_position);
         }, false);
+        $("#name_check").on("click",function(event){
+          self.saveScore($(this));
+        });
+        $("#new_game").on("click",function(event){
+          self.resetGame($(this));
+        });
+      }
+      BeWHOled.prototype.saveScore = function(item) {
+        if (!$("#high_scores_name").val()){
+          $("#message").css("color","#f00").text("Enter name")
+        } else {
+          $("#high_scores_name").hide();
+          if (!$("#your_name").is('*')){
+            $("#high_scores_name").after("<span id='your_name'>Name: " + $("#high_scores_name").val() + "</span>")
+          }
+          $("#message").css("color","#000").text("Score saved!  Click again to save another.")
+          $("#new_high_scores").submit()
+        }
+      }
+      BeWHOled.prototype.resetGame = function(item) {
+        var self = this;
+        this.show_overlay = true;
+        BeWHOledBoard.initialize(this.context);
+        setTimeout(function(){self.hideOverlay()},1000);
+        GameData.resetScore();
+        this.loadEventListeners();
       }
       BeWHOled.prototype.boardClicked = function(mouse_position) {
         var row, col;

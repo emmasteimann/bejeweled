@@ -1,0 +1,3 @@
+<% @high_scores.reverse.each_with_index do |player_score, idx| %>
+  <tr style="background-color:<%= cycle('gray', 'white') %>"><td><%= idx+1 %>. <%= player_score.name %></td><td><%= player_score.score %></td></tr>
+<% end %>

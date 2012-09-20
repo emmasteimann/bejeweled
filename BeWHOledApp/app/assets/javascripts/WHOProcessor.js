@@ -4,6 +4,7 @@ WHOProcessor = (function() {
 
   function WHOProcessor() {
     this.sequences = [];
+    this.initial_run = true;
   }
 
   WHOProcessor.prototype.sequencesExist = function() {
@@ -31,8 +32,9 @@ WHOProcessor = (function() {
       }
     }
     this.sequences = [];
-    // TODO: add to score keeper
-    // TODO: possibly add combo tracker
+    if(!this.initial_run){
+      GameData.setTotalScore(total_score);
+    }
   }
   WHOProcessor.prototype.findSpacesToFill = function() {
     var temp, row, column;

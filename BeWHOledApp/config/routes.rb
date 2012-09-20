@@ -1,6 +1,6 @@
 BeWHOledApp::Application.routes.draw do
 
-  get "high_scores/create"
+  resources :high_scores
 
   root :to => 'who_game#index'
   resources :who_game

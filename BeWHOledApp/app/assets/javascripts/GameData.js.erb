@@ -3,9 +3,45 @@ var GameData;
 GameData = (function() {
 
   function GameData() {
-
+    this.total_score = 0
+    this.score_bar_width = 0;
+    this.current_level = 1;
+    this.points_per_level = 500;
+    this.score_max_width = 195;
   }
+  GameData.prototype.setTotalScore = function (total_score) {
+    this.total_score += total_score;
+    $("#high_scores_score").val(this.total_score)
+    $("#score_total").text(this.total_score)
+    var max_points = (this.current_level * this.points_per_level)
+    if (this.total_score > max_points) {
+      this.current_level++;
+      this.points_per_level = this.points_per_level * 1.5;
+      BeWHOledBoard.initialize(BeWHOledGame.context);
+    }
+    var level_points = this.total_score;
+    if (current_level > 1) {
+      level_points = this.total_score - ((current_level - 1) * this.points_per_level)
+    }
+    $("#level_number").text(this.current_level);
 
+    var increment_value = this.score_max_width / max_points;
+    // var css_increment = increment_value * this.total_score;
+
+    this.score_bar_width = increment_value * level_points;
+    $("#score_bar").css("width", this.score_bar_width);
+  }
+  GameData.prototype.resetScore = function () {
+    this.total_score = 0
+    this.score_bar_width = 0;
+    this.current_level = 1;
+    this.points_per_level = 500;
+    this.score_max_width = 195;
+    $("#score_bar").css("width", 0);
+    $("#level_number").text(this.current_level);
+    $("#high_scores_score").val(this.total_score);
+    $("#score_total").text(this.total_score);
+  }
   GameData.prototype.images = {};
 
   GameData.prototype.loadImages = function(sources, callback) {

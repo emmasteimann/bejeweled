@@ -93,8 +93,11 @@
           $("#high_scores_name").hide();
           if (!$("#your_name").is('*')){
             $("#high_scores_name").after("<span id='your_name'>Name: " + $("#high_scores_name").val() + "</span>")
+            $("#message").css("color","#000").text("Score saved!  Click again to save another.")
+          } else {
+            $("#message").css("color","#000").text("Score of " + GameData.total_score + " saved.")
           }
-          $("#message").css("color","#000").text("Score saved!  Click again to save another.")
+
           $("#new_high_scores").submit()
         }
       }

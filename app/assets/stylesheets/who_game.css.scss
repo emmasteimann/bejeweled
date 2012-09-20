@@ -92,6 +92,10 @@ body {
         color: yellow;
         height: 20px;
       }
+      #name_check:active{
+        background-color: yellow;
+        color: #556B2F;
+      }
       #new_game{
         cursor: pointer;
         margin-top: 10px;
@@ -102,6 +106,10 @@ body {
         -moz-border-radius: 4px;
         color: white;
         height: 20px;
+      }
+      #new_game:active{
+        background-color: white;
+        color: #8B0000;
       }
       #score_bar_container {
         width: 195px;

@@ -165,6 +165,10 @@ body {
         tr {
           td {
             width: 97.5px;
+            max-width: 97px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
           }
           width: 195px;
         }

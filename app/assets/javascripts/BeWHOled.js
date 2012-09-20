@@ -108,7 +108,10 @@
         BeWHOledBoard.initialize(this.context);
         setTimeout(function(){self.hideOverlay()},1000);
         GameData.resetScore();
-        this.loadEventListeners();
+        this.canvas.addEventListener('click', function(evt) {
+          var mouse_position = self.getMousePos(self.canvas, evt);
+          self.boardClicked(mouse_position);
+        }, false);
       }
       /**
       * boardClicked - event method to detemine mouse position on board
@@ -160,10 +163,7 @@
       */
       BeWHOled.prototype.hideOverlay = function(){
         var self = this;
-        this.canvas.addEventListener('click', function(evt) {
-          var mouse_position = self.getMousePos(self.canvas, evt);
-          self.boardClicked(mouse_position);
-        }, false);
+        this.loadEventListeners();
         this.show_overlay = false;
       }
       /**

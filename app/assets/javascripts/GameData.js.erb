@@ -11,7 +11,7 @@ GameData = (function() {
   }
   GameData.prototype.setTotalScore = function (total_score) {
     this.total_score += total_score;
-    $("#high_scores_score").val(this.total_score)
+    // $("#high_scores_score").val(this.total_score)
     $("#score_total").text(this.total_score)
     var max_points = (this.current_level * this.points_per_level)
     if (this.total_score > max_points) {

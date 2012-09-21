@@ -12,7 +12,6 @@
       <h2 style="font-size: 50px;">Current score</h2>
       <div id="score_total">0</div>
       <%= form_for HighScores.new, :remote => true, :url => { :action =>  :create, :controller => :high_scores}, :html => {:class => "nifty_form"} do |f| %>
-      <%= f.hidden_field(:score) %>
       <%= f.text_field :name %>
       <%= button_tag(:type => 'button', :id =>"name_check") do content_tag(:strong, 'Save High Score') end %><span id="message"></span>
     <% end %>

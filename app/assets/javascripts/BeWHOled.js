@@ -87,6 +87,8 @@
       * @param {Object} item - DOM object sending
       */
       BeWHOled.prototype.saveScore = function(item) {
+        $.post("high_scores/set_session", {"score": GameData.total_score},
+         function(data) {});
         if (!$("#high_scores_name").val()){
           $("#message").css("color","#f00").text("Enter name")
         } else {

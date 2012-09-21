@@ -1,10 +1,16 @@
 BeWHOledApp::Application.routes.draw do
 
-  resources :high_scores
+
 
   root :to => 'who_game#index'
-  resources :who_game
+  # match "who_game" => "who_game#index"
+  post "high_scores" => "high_scores#create"
+  # match "high_scores/set_session" => "high_scores#set_session", :via => :post
+  # resources :high_scores, :only => [:create, :set_session]
+  match "high_scores/set_session", :via => :post
+  resources :who_game, :only => [:index]
   match '*path' => redirect('/')
+  # resources :high_scores
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

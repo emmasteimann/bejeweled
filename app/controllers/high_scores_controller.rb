@@ -1,7 +1,5 @@
 class HighScoresController < ApplicationController
-  require 'pry'
   def create
-    binding.pry
     params[:high_scores][:name] = Sanitize.clean(params[:high_scores][:name])
     params[:high_scores][:score] = session[:score]
     @score = HighScores.new(params[:high_scores])

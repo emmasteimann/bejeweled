@@ -88,20 +88,24 @@
       */
       BeWHOled.prototype.saveScore = function(item) {
         $.post("high_scores/set_session", {"score": GameData.total_score},
-         function(data) {});
-        if (!$("#high_scores_name").val()){
-          $("#message").css("color","#f00").text("Enter name")
-        } else {
-          $("#high_scores_name").hide();
-          if (!$("#your_name").is('*')){
-            $("#high_scores_name").after("<span id='your_name'>Name: " + $("#high_scores_name").val() + "</span>")
-            $("#message").css("color","#000").text("Score saved!  Click again to save another.")
-          } else {
-            $("#message").css("color","#000").text("Score of " + GameData.total_score + " saved.")
-          }
+         function(data) {
 
-          $("#new_high_scores").submit()
-        }
+            if (!$("#high_scores_name").val()){
+              $("#message").css("color","#f00").text("Enter name")
+            } else {
+              $("#high_scores_name").hide();
+              if (!$("#your_name").is('*')){
+                $("#high_scores_name").after("<span id='your_name'>Name: " + $("#high_scores_name").val() + "</span>")
+                $("#message").css("color","#000").text("Score saved!  Click again to save another.")
+              } else {
+                $("#message").css("color","#000").text("Score of " + GameData.total_score + " saved.")
+              }
+
+              $("#new_high_scores").submit()
+            }
+
+         });
+
       }
       /**
       * resetGame - event method to reload game

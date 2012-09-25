@@ -4,9 +4,9 @@ WHOAnimation = (function() {
 
   function WHOAnimation() {
     this.current_frame = 0;
-    this.swap_speed = 3;
+    this.swap_speed = 20;
     this.total_swap_frames = 70 / this.swap_speed;
-    this.swap_speed = 3 - (2 / this.total_swap_frames);
+    this.swap_speed = 20 - (2 / this.total_swap_frames);
     this.total_falling_frames = 0;
     this.animating_gems = null;
     this.second_pass = false;
@@ -14,6 +14,7 @@ WHOAnimation = (function() {
       gems_switch: 0,
       gems_falling: 0
     }
+    this.object_name = this.uniqid();
   }
   WHOAnimation.prototype.finishedSwapping = function() {
     for (i=0; i<this.animating_gems.length; i++) {
@@ -45,6 +46,7 @@ WHOAnimation = (function() {
     this.animation_type.gems_falling = 0;
     this.total_falling_frames = 0;
     this.second_pass = false;
+    delete GameData.current_animation_hash[this.object_name];
   }
   WHOAnimation.prototype.callFrame = function() {
     if (this.animating_gems){
@@ -108,6 +110,14 @@ WHOAnimation = (function() {
       this.animating_gems[i].shiftY(this.animating_gems[i].fall_distance*2);
     }
 
+  }
+  WHOAnimation.prototype.uniqid = function() {
+    var newDate = new Date;
+    var partOne = newDate.getTime();
+    var partTwo = 1 + Math.floor((Math.random()*32767));
+    var partThree = 1 + Math.floor((Math.random()*32767));
+    var id = partOne + '-' + partTwo + '-' + partThree;
+    return id;
   }
 
   return WHOAnimation;

@@ -43,11 +43,12 @@
         // }, 50);
         // Create globally accessible game objects
         window.GameData = new GameData();
-        window.WHOAnimation = new WHOAnimation();
+        window.WHOAnimationRunner = new WHOAnimation();
         window.WHOProcessor = new WHOProcessor();
         window.BeWHOledBoard = new WHOBoard();
 
         GameData.loadImages(this.sources);
+        GameData.current_animation_hash = {};
         this.context.drawImage(GameData.images.overlay, 0, 0, 560, 560);
         setTimeout(function(){self.hideOverlay()},2000);
         window.time_vortex = $('#time_vortex').get(0);
@@ -182,7 +183,7 @@
         if (WHOProcessor.sequencesExist()){
           WHOProcessor.setForRemoval();
           WHOProcessor.findSpacesToFill();
-          WHOAnimation.loadNewGems();
+          WHOAnimationRunner.loadNewGems();
         }
       }
       /**
@@ -199,7 +200,9 @@
       * @param {Object} gem_two - gem to be swapped
       */
       BeWHOled.prototype.switchTiles = function(gem_one, gem_two) {
-        WHOAnimation.flipFlop(gem_one, gem_two);
+        var swap_animation = new WHOAnimation();
+        GameData.current_animation_hash[swap_animation.object_name] = swap_animation;
+        swap_animation.flipFlop(gem_one, gem_two);
       }
       /**
       * getMousePos - grabs mouse data on canvas
@@ -220,7 +223,10 @@
       */
       BeWHOled.prototype.animate = function(canvas, context) {
         var self = this;
-        WHOAnimation.callFrame();
+        WHOAnimationRunner.callFrame();
+        for (i in GameData.current_animation_hash) {
+          GameData.current_animation_hash[i].callFrame();
+        }
         // clear
         context.clearRect(0, 0, canvas.width, canvas.height);
 

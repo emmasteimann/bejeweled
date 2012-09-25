@@ -8,6 +8,7 @@ GameData = (function() {
     this.current_level = 1;
     this.points_per_level = 500;
     this.score_max_width = 195;
+    this.current_animation_hash = {};
   }
   GameData.prototype.setTotalScore = function (total_score) {
     this.total_score += total_score;

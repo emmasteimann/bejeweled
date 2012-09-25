@@ -4,9 +4,9 @@ WHOAnimation = (function() {
 
   function WHOAnimation() {
     this.current_frame = 0;
-    this.swap_speed = 20;
+    this.swap_speed = 3;
     this.total_swap_frames = 70 / this.swap_speed;
-    this.swap_speed = 20 - (2 / this.total_swap_frames);
+    this.swap_speed = 3 - (2 / this.total_swap_frames);
     this.total_falling_frames = 0;
     this.animating_gems = null;
     this.second_pass = false;
@@ -78,9 +78,9 @@ WHOAnimation = (function() {
           shift_direction = -1;
         }
         var flop_distance = Math.abs((gem_one.relative_y - 10) - (gem_two.relative_y - 10))
-        this.swap_speed = 2;
+        this.swap_speed = 5;
         this.total_swap_frames = flop_distance / this.swap_speed;
-        this.swap_speed = this.swap_speed - (2 / this.total_swap_frames);
+        this.swap_speed = this.swap_speed - (5 / this.total_swap_frames);
 
         gem_one.shiftY(this.swap_speed * shift_direction);
         gem_two.shiftY(this.swap_speed * -shift_direction);
@@ -93,9 +93,9 @@ WHOAnimation = (function() {
           shift_direction = -1;
         }
         var flop_distance = Math.abs((gem_one.relative_x - 10) - (gem_two.relative_x - 10))
-        this.swap_speed = 2;
+        this.swap_speed = 5;
         this.total_swap_frames = flop_distance / this.swap_speed;
-        this.swap_speed = this.swap_speed - (2 / this.total_swap_frames);
+        this.swap_speed = this.swap_speed - (5 / this.total_swap_frames);
 
         gem_one.shiftX(this.swap_speed * shift_direction);
         gem_two.shiftX(this.swap_speed * -shift_direction);

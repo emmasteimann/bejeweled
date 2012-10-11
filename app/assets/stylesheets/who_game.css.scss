@@ -5,6 +5,9 @@ body {
   margin: 0 auto;
   padding: 0px;
   width: 820px;
+  #time_vortex{
+    margin-top: 22px;
+  }
   footer{
     margin-top: 15px;
     font-family: 'Skranji', cursive;
@@ -25,6 +28,8 @@ body {
   }
   #bewholed_canvas {
     border: 1px solid #9C9898;
+    margin-top: -76px;
+    float: left;
   }
   #game_container {
     height: 560px;

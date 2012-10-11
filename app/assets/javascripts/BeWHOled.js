@@ -129,8 +129,8 @@
       */
       BeWHOled.prototype.boardClicked = function(mouse_position) {
         var row, col;
-        col = Math.floor(mouse_position.x /70)
-        row = Math.floor(mouse_position.y /70)
+        col = ~~(mouse_position.x /70)
+        row = ~~(mouse_position.y /70)
 
         // Debug to log messages one the screen
         if (this.debug_mode){

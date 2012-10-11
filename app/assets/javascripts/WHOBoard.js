@@ -49,7 +49,7 @@ WHOBoard = (function() {
     this.gems[gem.row][gem.col] = gem;
   }
   WHOBoard.prototype.randomGem = function(row,col){
-    selection = Math.floor((Math.random()*7)+1);
+    selection = ~~((Math.random()*7)+1);
     gem = null;
     switch (selection){
       case 1:
@@ -84,7 +84,7 @@ WHOBoard = (function() {
     for (i = 0; i < array.length; i++){
       random_array.splice(random_array.indexOf(array[i]), 1);
     }
-    var selection = random_array[Math.floor(Math.random() * random_array.length)];
+    var selection = random_array[~~(Math.random() * random_array.length)];
     gem = null;
     switch (selection){
       case 1:

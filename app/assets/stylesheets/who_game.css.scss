@@ -7,9 +7,10 @@ body {
   width: 820px;
   #time_vortex{
     margin-top: 22px;
+    display: none;
   }
   footer{
-    margin-top: 15px;
+    margin-top: 30px;
     font-family: 'Skranji', cursive;
     color: #555;
     .details{
@@ -28,7 +29,7 @@ body {
   }
   #bewholed_canvas {
     border: 1px solid #9C9898;
-    margin-top: -76px;
+    margin-top: 22px;
   }
   #game_container {
     height: 560px;

@@ -174,6 +174,8 @@
       BeWHOled.prototype.hideOverlay = function(){
         var self = this;
         this.loadEventListeners();
+        $("#time_vortex").show();
+        $("#bewholed_canvas").css("margin-top", "-76px");
         this.show_overlay = false;
       }
       /**
